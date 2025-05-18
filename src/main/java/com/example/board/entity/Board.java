@@ -1,10 +1,14 @@
 package com.example.board.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 @Entity
 @Table(name = "board")
 public class Board extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +19,18 @@ public class Board extends BaseEntity {
     @Column(columnDefinition = "longtext")
     private String contents;
 
+    @Setter
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public Board() {
+
+    }
+
+    public Board(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
+
 }
